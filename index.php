@@ -1,3 +1,6 @@
+<?php
+  require "includes/config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,26 +53,30 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header"><h3>Комментарии</h3></div>
-                                <?php
-                                    $users = [ 
-                                            ['avatar' => '/img/no-user.jpg', 'username' => 'Anton', 'dataComment' => '12/10/2025', 'userComment' => 'Hello'], 
-                                            ['avatar' => '/img/no-user.jpg', 'username' => 'Kiril', 'dataComment' => '13/10/2025', 'userComment' => 'Hello guys'], 
-                                            ['avatar' => '/img/no-user.jpg', 'username' => 'Vivian', 'dataComment' => '10/10/2025', 'userComment' => 'good day'], 
-                                            ['avatar' => '/img/no-user.jpg', 'username' => 'Roman', 'dataComment' => '11/10/2025', 'userComment' => 'welcome']
-                                    ];
-                                ?>
                                 <div class="card-body">
                                     <div class="alert alert-success" role="alert">
                                       Комментарий успешно добавлен
                                   </div>
-                                  <?php foreach ($users as $user): ?>
+                                  <?php 
+                                        // Соединяемся с Базой Данных
+                                        include "./includes/config.php";
+                                        $sql = "SELECT * FROM `comments` ORDER BY `id` DESC";
+                                        $statement = $pdo->prepare($sql);
+                                        $statement->execute();
+                                        $count_id = $statement->fetch(PDO::FETCH_OBJ);
+                                        if( $count_id = 0) {
+                                            echo "Нет комментариев!";
+                                        }
+
+                                  ?>
+                                  <?php foreach ($statement as $comment): ?>
                                     <div class="media">
-                                        <img src="<?php echo $user['avatar'];?>" class="mr-3" alt="..." width="64" height="64">
+                                        <img src="<?php echo $comment['avatar'];?>" class="mr-3" alt="..." width="64" height="64">
                                         <div class="media-body">
-                                          <h5 class="mt-0"><?php echo $user['username']; ?></h5> 
-                                          <span><small><?php echo $user['dataComment']; ?></small></span>
+                                          <h5 class="mt-0"><?php echo $comment['author'];?></h5> 
+                                          <span><small><?php echo $comment['pupdate'];?></small></span>
                                           <p>
-                                              <?php echo $user['userComment']; ?>
+                                              <?php echo $comment['text'];?>
                                           </p>
                                       </div>
                                   </div>
@@ -83,16 +90,16 @@
                             <div class="card-header"><h3>Оставить комментарий</h3></div>
 
                             <div class="card-body">
-                                <form action="/store" method="post">
+                                <form action="./includes/store.php" method="POST">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
-                                    <input name="name" class="form-control" id="exampleFormControlTextarea1" />
+                                    <input name="name" class="form-control" id="exampleFormControlTextarea1" placeholder="Имя"/>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Сообщение</label>
-                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Текст комментария ..." ></textarea>
                                   </div>
-                                  <button type="submit" class="btn btn-success">Отправить</button>
+                                  <button type="submit" name="do_post" class="btn btn-success">Отправить</button>
                                 </form>
                             </div>
                         </div>
