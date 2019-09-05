@@ -63,13 +63,10 @@
                                         $sql = "SELECT * FROM `comments` ORDER BY `id` DESC";
                                         $statement = $pdo->prepare($sql);
                                         $statement->execute();
-                                        $count_id = $statement->fetch(PDO::FETCH_OBJ);
-                                        if( $count_id = 0) {
-                                            echo "Нет комментариев!";
-                                        }
+                                        $count_id = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                                   ?>
-                                  <?php foreach ($statement as $comment): ?>
+                                  <?php foreach ($count_id as $comment): ?>
                                     <div class="media">
                                         <img src="<?php echo $comment['avatar'];?>" class="mr-3" alt="..." width="64" height="64">
                                         <div class="media-body">
