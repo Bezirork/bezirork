@@ -1,5 +1,7 @@
 <?php
-  require "includes/config.php";
+session_start();
+//Пишем в сессию:
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,9 +56,15 @@
                         <div class="card">
                             <div class="card-header"><h3>Комментарии</h3></div>
                                 <div class="card-body">
-                                    <div class="alert alert-success" role="alert">
-                                      Комментарий успешно добавлен
-                                  </div>
+                                        
+                                  <?php
+                                    if(isset($_SESSION['messages'])) {
+                                            $messages = $_SESSION['messages']['message'];
+                                            echo "<div class=\"alert alert-success\" role=\"alert\">$messages</div>";
+                                            unset($_SESSION['messages']);
+                                        };
+                                  ?>
+                                  
                                   <?php 
                                         // Соединяемся с Базой Данных
                                         include "./includes/config.php";
