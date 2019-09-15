@@ -1,7 +1,5 @@
 <?php
 session_start();
-//Пишем в сессию:
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +77,7 @@ session_start();
                                         <img src="<?php echo $comment['avatar'];?>" class="mr-3" alt="..." width="64" height="64">
                                         <div class="media-body">
                                           <h5 class="mt-0"><?php echo $comment['author'];?></h5> 
-                                          <span><small><?php echo $comment['pupdate'];?></small></span>
+                                          <span><small><?php echo DateTime::createFromFormat('Y-m-d H:i:s',$comment['pubdate'])->format('d/m/Y H:i:s');?></small></span>
                                           <p>
                                               <?php echo $comment['text'];?>
                                           </p>
