@@ -96,10 +96,24 @@ session_start();
                                 <form action="./includes/store.php" method="POST">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
+                                     <?php
+                                        if(isset($_SESSION['no_names'])) {
+                                            $no_name = $_SESSION['no_names']['no_name'];
+                                            echo "<div class=\"alert alert-success\" role=\"alert\">$no_name</div>";
+                                            unset($_SESSION['no_names']);
+                                        };
+                                      ?>
                                     <input name="name" class="form-control" id="exampleFormControlTextarea1" placeholder="Имя"/>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Сообщение</label>
+                                    <?php
+                                        if(isset($_SESSION['no_texts'])) {
+                                                $no_text = $_SESSION['no_texts']['no_text'];
+                                                echo "<div class=\"alert alert-success\" role=\"alert\">$no_text</div>";
+                                                unset($_SESSION['no_texts']);
+                                        } 
+                                      ?>
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Текст комментария ..." ></textarea>
                                   </div>
                                   <button type="submit" name="do_post" class="btn btn-success">Отправить</button>

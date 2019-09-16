@@ -14,6 +14,11 @@ if( !empty($text) && !empty($name) ) {
 			$statement->execute([':name' => $name, ':text' => $text, ':pubdate' => $pubdate]);
 			$_SESSION['messages'] = [ 'message' => 'Комментарий успешно добавлен!' ];
 		} else {
-			$_SESSION['messages'] = [ 'message' => 'Пожалуйста, заполните все поля!' ];
+			if( empty($name) ) {
+			$_SESSION['no_names'] =	[	'no_name' => 'Введите Имя!'	]; 
+			}
+			if( empty($text) ) {
+			$_SESSION['no_texts'] =	[	'no_text' => 'Введите текст комментария!'	];
+			}
 		}
 header('Location: /'); die();
