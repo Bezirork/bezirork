@@ -93,7 +93,7 @@ session_start();
                             <div class="card-header"><h3>Оставить комментарий</h3></div>
 
                             <div class="card-body">
-                                <form action="./includes/store.php" method="POST">
+                                <form action="./includes/store_comm.php" method="POST">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
                                      <?php
