@@ -1,5 +1,7 @@
 <?php
 session_start();
+ // Соединяемся с Базой Данных
+include "./includes/config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,8 +66,7 @@ session_start();
                                   ?>
                                   
                                   <?php 
-                                        // Соединяемся с Базой Данных
-                                        include "./includes/config.php";
+                                       
                                         $sql = "SELECT * FROM `comments` ORDER BY `id` DESC";
                                         $statement = $pdo->prepare($sql);
                                         $statement->execute();

@@ -3,9 +3,9 @@
 session_start();
 // Соединяемся с Базой Данных используя файл config.php
 include "config.php";
-$do_post	= $_POST['do_post'];
-$text = trim( $_POST['text'] );
-$name = trim( $_POST['name'] );
+$do_post	= $data['do_post'];
+$text = trim( $data['text'] );
+$name = trim( $data['name'] );
 $pubdate = date("Y-m-d H:i:s");
 if( !empty($text) && !empty($name) ) {
 	// sql запрос к БД

@@ -16,4 +16,4 @@ try {
 } catch (PDOException $e) {
 		die("Не могу подключится к базе данных");
 }
-
+$data = $_POST;
