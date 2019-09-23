@@ -98,10 +98,10 @@ include "./includes/config.php";
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Имя</label>
                                      <?php
-                                        if(isset($_SESSION['no_names'])) {
-                                            $no_name = $_SESSION['no_names']['no_name'];
-                                            echo "<div class=\"alert alert-success\" role=\"alert\">$no_name</div>";
-                                            unset($_SESSION['no_names']);
+                                        if(isset($_SESSION['no_authors'])) {
+                                            $no_author = $_SESSION['no_authors']['no_author'];
+                                            echo "<div class=\"alert alert-success\" role=\"alert\">$no_author</div>";
+                                            unset($_SESSION['no_authors']);
                                         };
                                       ?>
                                     <input name="name" class="form-control" id="exampleFormControlTextarea1" placeholder="Имя"/>

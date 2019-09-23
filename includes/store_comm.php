@@ -15,7 +15,7 @@ if( !empty($text) && !empty($name) ) {
 			$_SESSION['messages'] = [ 'message' => 'Комментарий успешно добавлен!' ];
 		} else {
 			if( empty($name) ) {
-			$_SESSION['no_names'] =	[	'no_name' => 'Введите Имя!'	]; 
+			$_SESSION['no_authors'] =	[	'no_author' => 'Введите Имя!'	]; 
 			}
 			if( empty($text) ) {
 			$_SESSION['no_texts'] =	[	'no_text' => 'Введите текст комментария!'	];
