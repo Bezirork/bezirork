@@ -1,5 +1,14 @@
 <?php
 session_start();
+// Соединяемся с Базой Данных
+include "./includes/config.php";
+// $email = trim( $data['register_email'] );
+
+// $sql = "SELECT COUNT(*) FROM `users` WHERE email = :email";
+// $statement = $pdo->prepare($sql);
+// $statement->execute([':email' => $email]);
+// $emails = $statement->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($emails); die();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +64,13 @@ session_start();
                             <div class="card-header">Register</div>
 
                             <div class="card-body">
+                                <?php
+                                    if(isset($_SESSION['reg'])) {
+                                        $message_reg = $_SESSION['reg']['message_reg'];
+                                        echo "<div class=\"alert alert-success\" role=\"alert\">$message_reg</div>";
+                                        unset($_SESSION['reg']);
+                                    };
+                                ?>
                                 <form method="POST" action="./includes/store_reg.php">
 
                                     <div class="form-group row">
@@ -78,6 +94,11 @@ session_start();
                                         <div class="col-md-6">
                                             <input id="register_email" type="email" class="form-control" name="register_email" >
                                                  <?php
+                                                     if(isset($_SESSION['already_exists'])) {
+                                                        $exists = $_SESSION['already_exists']['exists'];
+                                                        echo "<span class=\"feedback\" role=\"alert\"><strong>$exists</strong></span>";
+                                                        unset($_SESSION['already_exists']);
+                                                    };
                                                     if(isset($_SESSION['no_emails'])) {
                                                         $no_email = $_SESSION['no_emails']['no_email'];
                                                         echo "<span class=\"feedback\" role=\"alert\"><strong>$no_email</strong></span>";
